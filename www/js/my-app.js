@@ -3,7 +3,7 @@ var TuCocinasApp = new Framework7({
 	swipePanel: 'left'
 });
 var $$ = Dom7;
-var url_server = 'http://192.168.1.3:8000/';
+var url_server = 'http://tucocinas.herokuapp.com/';
 var var_loading = false;
 var next_link = '';
 var lastIndex = 0;
