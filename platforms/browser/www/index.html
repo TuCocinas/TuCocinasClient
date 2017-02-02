@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Security-Policy" content="default-src * 'self' data: gap: https://ssl.gstatic.com  'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-eval' 'unsafe-inline'; media-src *">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<title>TuCocinas</title>
+		<link rel="stylesheet" href="lib/framework7/css/framework7.ios.css">
+		<link rel="stylesheet" href="lib/framework7/css/framework7.material.colors.css">
+		<link rel="stylesheet" href="icons/css/framework7-icons.css">
+		<link rel="stylesheet" href="css/styles.min.css">
+	</head>
+	<body class="theme-orange">
+		<div class="statusbar-overlay"></div>
+		<div class="panel-overlay"></div>
+		<div class="animation"></div>
+		<!-- Menu Option -->
+		<div class="panel panel-left panel-reveal">
+			<p class="menu-title"><b>MENÚ PRINCIPAL</b></p>
+			<ul class="menu-list">
+				<li>
+					<a href="index.html" class="link close-panel">
+						<i class="icon f7-icons">home_fill</i>
+						<span>Inicio</span>
+					</a>
+				</li>
+				<li>
+					<a href="html/about.html" class="link close-panel">
+						<i class="icon f7-icons">help_fill</i>
+						<span>Acerca</span>
+					</a>
+				</li>
+			</ul>
+			<ul class="menu-list">
+				<li>
+					<a href="html/login.html" class="link close-panel" id="login">
+						<i class="icon f7-icons">persons_fill</i>
+						<span>Ingresar</span>
+					</a>
+				</li>
+			</ul>
+			<p class="copyright text-center">Copyright © 2017</p>
+		</div>
+		<div class="views">
+			<div class="view view-main">
+				<!-- Menu Button -->
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="left">
+							<a href="#" class="link icon-only open-panel"><i class="icon f7-icons">menu</i></a>
+						</div>
+						<div class="center sliding">Bienvenido</div>
+					</div>
+				</div>
+				<!-- Content -->
+				<div class="pages navbar-through toolbar-through">
+					<div data-page="home" class="page">
+						<div class="page-content">
+							<div class="content-block">
+								<div class="row" id="content_data"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="lib/framework7/js/framework7.js"></script>
+		<script type="text/javascript" src="js/my-app.js"></script>
+	</body>
+</html>

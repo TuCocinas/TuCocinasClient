@@ -1,0 +1,174 @@
+CARROT_COLOR = #e67e22
+GRAY_COLOR = #5d5d5d
+BLACK_COLOR = #242424
+
+border-radius(args)
+	-webkit-border-radius args
+	-moz-border-radius args
+	border-radius args
+
+box-shadow(args)
+	-webkit-box-shadow args
+	-moz-box-shadow args
+	box-shadow args
+
+body
+	color BLACK_COLOR
+
+.box-border-radius
+	border-radius(3px)
+
+.statusbar-overlay
+	background #000
+
+.text-center
+	text-align center
+
+.text-right
+	text-align right
+
+.form-group
+	margin-top 10px
+	padding 0px 20px
+
+.form-control
+	background-color white !important
+	margin-top 20px !important
+	border-bottom #DBDBCE 1px solid !important
+	padding-left 10px !important
+
+.login-screen-content
+	background-image url('../img/background-login.jpg')
+	background-size cover
+	padding 20px
+
+#login-form
+	padding 5px 30px
+
+.login-screen-title
+	margin 0
+	padding-top 10px
+
+.btn-facebook
+	color white !important
+	margin-top 5px
+	background-color #2C4389
+
+.btn-default
+	color BLACK_COLOR !important
+	padding 10px 30px
+	background-color #EFEFF4
+
+.content-form
+	background white
+	padding 5px 10px
+
+.close-login-screen
+	width 100%
+	padding 10px 30px
+	color white
+
+.btn-login
+	color white !important
+	background-color CARROT_COLOR
+
+a
+.navbar
+	color white !important
+
+i.icon.icon-bars
+	background-image url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M3%2018h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'%20fill%3D'%23ffffff'%2F%3E%3C%2Fsvg%3E")
+
+.loading-animation
+	width 100%
+	height 100%
+	top 0
+	bottom 0
+	position fixed
+	background-color rgba(0, 0, 0, 0.54)
+	z-index 10000
+	transition 1s
+
+.loading
+	margin 300px auto
+	padding 10px 0px 1px 0px
+	width 150px
+	background-color white
+	transition 1.2s
+
+.box-padding
+	padding 5px 10px
+
+.content-white
+	background-color white
+	box-shadow(0 1px 1px 0 rgba(0,0,0,0.2))
+	margin-bottom 10px
+	width 100%
+	.content-image
+		display initial
+		img
+			width 100%
+	.content-recipe
+		p
+			margin 0
+			color GRAY_COLOR
+		.title
+			font-size 20px
+		.description
+			font-size 14px
+	.content-control
+		padding 10px
+		img
+			vertical-align middle
+			width 20px
+		span
+			color GRAY_COLOR
+
+.link-grid
+	img
+		width 20px
+		vertical-align middle
+		padding-bottom 10px
+
+.link-control-option
+	padding-right 10px
+	span
+		padding-left 3px
+
+.link-control-like
+	float right
+	img
+		transition 1s
+
+.msg-error
+	margin 250px auto
+	padding 20px
+	p
+		margin 0
+		color GRAY_COLOR
+		font-size 20px
+
+.panel
+	background-color #efeff4
+
+.menu-title
+.copyright
+	padding 16px
+	margin 0
+
+.menu-list
+	margin-top 0
+	li
+		list-style none
+		margin-left -40px
+		width auto
+		background-color white
+		border-bottom #DBDBCE 1px solid
+		a
+			color BLACK_COLOR !important
+			display block
+			padding 10px
+			i
+				color CARROT_COLOR
+			span
+				padding-left 10px
