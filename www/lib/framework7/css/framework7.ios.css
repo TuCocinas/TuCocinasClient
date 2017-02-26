@@ -1007,7 +1007,6 @@ html:not(.watch-active-state) .subnavbar a.link:active,
   top: auto;
   height: 1px;
   width: 100%;
-  background-color: #c4c4c4;
   display: block;
   z-index: 15;
   -webkit-transform-origin: 50% 100%;
@@ -2045,7 +2044,6 @@ html.pixel-ratio-3 .content-block-inner:after {
   right: auto;
   height: 1px;
   width: 100%;
-  background-color: #c8c7cc;
   display: block;
   z-index: 15;
   -webkit-transform-origin: 50% 0%;

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Security-Policy" content="default-src * 'self' data: gap: https://ssl.gstatic.com  'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-eval' 'unsafe-inline'; media-src *">
+		<meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'self' data: gap: https://ssl.gstatic.com  'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-eval' 'unsafe-inline'; media-src *; img-src 'self' data: *">
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0, minimal-ui">
+		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
@@ -14,7 +15,7 @@
 		<link rel="stylesheet" href="icons/css/framework7-icons.css">
 		<link rel="stylesheet" href="css/styles.min.css">
 	</head>
-	<body class="theme-orange">
+	<body class="theme-red">
 		<div class="statusbar-overlay"></div>
 		<div class="panel-overlay"></div>
 		<div class="animation"></div>
@@ -34,12 +35,16 @@
 						<span>Acerca</span>
 					</a>
 				</li>
-			</ul>
-			<ul class="menu-list">
-				<li>
+				<li id="content-user">
 					<a href="html/login.html" class="link close-panel" id="login">
 						<i class="icon f7-icons">persons_fill</i>
-						<span>Ingresar</span>
+						<span>Iniciar sesión</span>
+					</a>
+				</li>
+				<li>
+					<a href="html/configuration.html" class="link close-panel">
+						<i class="icon f7-icons">settings_fill</i>
+						<span>Configuración</span>
 					</a>
 				</li>
 			</ul>
@@ -53,7 +58,9 @@
 						<div class="left">
 							<a href="#" class="link icon-only open-panel"><i class="icon f7-icons">menu</i></a>
 						</div>
-						<div class="center sliding">Bienvenido</div>
+						<div class="center sliding">
+							<img src="img/logo.png" width="120px">
+						</div>
 					</div>
 				</div>
 				<!-- Content -->
@@ -61,15 +68,18 @@
 					<div data-page="home" class="page">
 						<div class="page-content">
 							<div class="content-block">
-								<div class="row" id="content_data"></div>
+								<div id="content_data"></div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div id="toolbar"></div>
 			</div>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="lib/framework7/js/framework7.js"></script>
-		<script type="text/javascript" src="js/my-app.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
+		<script type="text/javascript" src="js/main-page.js"></script>
+		<script type="text/javascript" src="js/listen-page.js"></script>
 	</body>
 </html>

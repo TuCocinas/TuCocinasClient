@@ -1,6 +1,8 @@
 CARROT_COLOR = #e67e22
 GRAY_COLOR = #5d5d5d
 BLACK_COLOR = #242424
+ESMERALD_COLOR = #2ecc71
+ALIZARIN_COLOR = #e74c3c
 
 border-radius(args)
 	-webkit-border-radius args
@@ -16,7 +18,10 @@ body
 	color BLACK_COLOR
 
 .box-border-radius
-	border-radius(3px)
+	border-radius(5px)
+
+.box-top-border-radius
+	border-radius(5px 5px 0px 0px)
 
 .statusbar-overlay
 	background #000
@@ -34,30 +39,63 @@ body
 .form-control
 	background-color white !important
 	margin-top 20px !important
-	border-bottom #DBDBCE 1px solid !important
 	padding-left 10px !important
 
 .login-screen-content
-	background-image url('../img/background-login.jpg')
-	background-size cover
-	padding 20px
-
-#login-form
-	padding 5px 30px
+.signup-screen-content
+	padding 0px 10px !important
 
 .login-screen-title
-	margin 0
+.signup-screen-title
 	padding-top 10px
+	color ALIZARIN_COLOR
+	font-size 20px
+	text-align left
+	margin 0px auto !important
 
 .btn-facebook
 	color white !important
 	margin-top 5px
 	background-color #2C4389
+	position relative
+	padding-left 44px
+	text-align left
+	white-space nowrap
+	overflow hidden
+	text-overflow ellipsis
+	.icon
+		position absolute
+		left 5px
+		top 0
+		bottom 0
+		width 32px
+		line-height 43px
+		font-size 1.3em
+		text-align center
 
 .btn-default
 	color BLACK_COLOR !important
 	padding 10px 30px
 	background-color #EFEFF4
+
+.btn-primary
+	background-color ALIZARIN_COLOR
+	display inline-block
+	color white !important
+	width 100%
+	padding 10px 0px
+
+.background-login
+.background-signup
+	background-size cover
+	width 100%
+	height 120px
+
+.background-login
+	background-image url(../img/background-login.jpg)
+
+.background-signup
+	background-image url(../img/background-signup.jpg)
 
 .content-form
 	background white
@@ -70,7 +108,7 @@ body
 
 .btn-login
 	color white !important
-	background-color CARROT_COLOR
+	background-color ESMERALD_COLOR
 
 a
 .navbar
@@ -90,7 +128,7 @@ i.icon.icon-bars
 	transition 1s
 
 .loading
-	margin 300px auto
+	margin 60% auto
 	padding 10px 0px 1px 0px
 	width 150px
 	background-color white
@@ -106,23 +144,28 @@ i.icon.icon-bars
 	width 100%
 	.content-image
 		display initial
-		img
-			width 100%
 	.content-recipe
 		p
 			margin 0
 			color GRAY_COLOR
-		.title
-			font-size 20px
-		.description
-			font-size 14px
-	.content-control
-		padding 10px
-		img
-			vertical-align middle
-			width 20px
-		span
-			color GRAY_COLOR
+
+.content-control
+	padding 10px
+	img
+		vertical-align middle
+		width 20px
+	span
+		color GRAY_COLOR
+
+.title
+	font-size 20px
+
+.img-background
+	width 100%
+	height 200px
+	object-fit cover
+	background-color #E9E8E3
+	transition 1s
 
 .link-grid
 	img
@@ -169,6 +212,75 @@ i.icon.icon-bars
 			display block
 			padding 10px
 			i
-				color CARROT_COLOR
+				color ALIZARIN_COLOR
 			span
 				padding-left 10px
+
+input[type=submit]
+	width 100%
+	font-size 15px
+
+.toolbar
+	background-color white !important
+	.link-option
+		color ALIZARIN_COLOR !important
+	.link-option-active
+		color white !important
+		background-color ALIZARIN_COLOR
+
+.form-search
+	width 80%
+	padding 10px
+
+.no-border
+	border none
+
+.item-input
+	border-bottom 1px #efeff4 solid
+
+.link-inside
+	color ALIZARIN_COLOR !important
+
+.box-paso
+	background-color ALIZARIN_COLOR
+	color white
+	padding 10px
+	span
+		color white
+		padding 0px 5px
+		font-size 15px !important
+
+.content-upload-image
+	.input-upload-receta-image
+		position absolute
+		top 0
+		right 0
+		margin 0
+		opacity 0
+		transform translate(0px,40px) scale(1)
+		width 100%
+		height 200px
+	.upload-image
+		position absolute
+		text-shadow 0px 0px 2px black
+		top 50px
+		left 0
+		right 0
+		padding-top 50px
+		font-size 18px
+		color white !important
+		i
+			font-size 50px
+		p
+			margin 5px
+
+.form-complete
+	width 100% !important
+
+.spacing-top
+	margin-top 2px
+
+.list-item
+	padding 0px
+	li
+		padding 2px 0px

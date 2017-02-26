@@ -1,0 +1,113 @@
+<div class="pages">
+	<div data-page="nuevo" class="page">
+		<div class="page-content hide-bars-on-scroll">
+			<form id="form-save-receta" method="post" accept-charset="utf-8">
+				<div class="img-background content-upload-image">
+					<img src="" class="img-background img-uploaded">
+					<div class="upload-image text-center">
+						<i class="icon f7-icons">camera_fill</i>
+						<p>Publica la foto de tu receta</p>
+					</div>
+					<input type="file" name="file" class="input-upload-receta-image" accept="image/*" input-required="false" title="foto de la receta" value>
+				</div>
+				<div class="content-block" style="margin-top: 10px;">
+					<div class="content-white box-border-radius">
+						<div style="padding: 5px;">
+							<div class="spacing-top">
+								<textarea type="textarea" class="no-border title resizable form-complete" name="title_receta" id="id_title_receta" placeholder="Título de la receta" input-required="true" rows="1" title="nombre de la receta"></textarea>
+							</div>
+							<div class="spacing-top">
+								<textarea type="textarea" class="no-border resizable form-complete" name="descripcion_receta" id="id_descripcion_receta" placeholder="Escribe una breve descripción de la receta" rows="1" input-required="true" title="descripción de la receta"></textarea>
+							</div>
+							<p class="text-center"><b>Información de la receta</b></p>
+							<div class="spacing-top content-control">
+								<div class="row">
+									<div class="col-60">
+										<label><img src="img/icon/portion.png"> <b>Cantidad de raciones:</b></label>
+									</div>
+									<div class="col-40">
+										<input type="number" class="no-border form-complete" name="racion_receta" id="id_racion_receta" placeholder="0" input-required="true" title="cantidad">
+									</div>
+								</div>
+							</div>
+							<div class="spacing-top content-control">
+								<div class="row">
+									<div class="col-30">
+										<label><img src="img/icon/level_hard.png"> <b>Dificultad:</b></label>
+									</div>
+									<div class="col-70" style="width: 70%;">
+										<select type="select" class="no-border form-complete" name="dificultad_receta" id="id_dificultad_receta" input-required="true" title="dificultad de la receta">
+											<option value="">Selecciona la dificultad</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="spacing-top content-control">
+								<div class="row">
+									<div class="col-60">
+										<label><img src="img/icon/time.png"> <b>Tiempo de preparación:</b></label>
+									</div>
+									<div class="col-40">
+										<input type="text" class="no-border form-complete" name="tiempo_receta" id="id_tiempo_receta" placeholder="10:00" input-required="true" title="tiempo de elaboración">
+									</div>
+								</div>
+							</div>
+							<div class="spacing-top content-control">
+								<div class="row">
+									<div class="col-30">
+										<label><b>Categoría:</b></label>
+									</div>
+									<div class="col-70" style="width: 70%;">
+										<select type="select" class="no-border form-complete" name="categoria_receta" id="id_categoria_receta" input-required="true" title="categoría de la receta">
+											<option value="">Selecciona la categoría</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="spacing-top content-control">
+								<div class="row">
+									<div class="col-30">
+										<label><b>Tipo de receta:</b></label>
+									</div>
+									<div class="col-70" style="width: 60%;">
+										<select type="select" class="no-border form-complete" name="tipo_receta" id="id_tipo_receta" input-required="true" title="tipo de receta">
+											<option value="">Selecciona el tipo</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<p class="text-center"><b>Ingredientes</b></p>
+							<div class="row" style="padding: 0px 10px;">
+								<div class="col-100">
+									<ul id="ingrediente_receta_item" class="list-item"></ul>
+									<div class="spacing-top">
+										<input type="text" class="no-border form-complete" name="ingrediente_receta" id="id_ingrediente_receta" placeholder="1/2 Lb de arroz" input-required="false">
+									</div>
+									<p class="text-center">
+										<a id="btn_add_ingrediente" class="link-inside">
+											<i class="icon f7-icons">add_round_fill</i> Agregar ingrediente
+										</a>
+									</p>
+								</div>
+							</div>
+							<p class="text-center"><b>Pasos</b></p>
+							<div class="row" style="padding: 0px 10px;">
+								<div class="col-100">
+									<ul id="paso_receta_item" class="list-item"></ul>
+									<div class="spacing-top">
+										<input type="text" class="no-border form-complete" name="paso_receta" id="id_paso_receta" placeholder="¿Qué hay que hacer?" input-required="false">
+									</div>
+									<p class="text-center">
+										<a id="btn_add_paso" class="link-inside">
+											<i class="icon f7-icons">add_round_fill</i> Agregar paso
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,22 +1,23 @@
 <div class="login-screen modal-in">
 	<div class="view">
 		<div class="page" data-page="login">
-			<div class="page-content login-screen-content">
-				<div class="content-white box-border-radius" style="margin-top: 80px; margin-bottom: 40px;">
+			<div class="background-login"></div>
+			<div class="page-content" style="padding-top: 0;">
+				<div class="login-screen-content" style="height: 500px;">
 					<div class="login-screen-title">
-						TuCocinas
+						<b>Ingreso a TuCocinas</b>
 					</div>
-					<form id="login-form">
+					<form id="login-form" method="POST">
 						<div class="list-block item-block">
 							<ul>
 								<li>
 									<div class="item-input">
-										<input type="text" class="form-control" name="username" placeholder="Correo electrónico">
+										<input type="text" class="form-control" name="username" placeholder="Correo electrónico" required>
 									</div>
 								</li>
 								<li>
 									<div class="item-input">
-										<input type="password" class="form-control" name="password" placeholder="Contraseña">
+										<input type="password" class="form-control" name="password" placeholder="Contraseña" required>
 									</div>
 								</li>
 							</ul>
@@ -24,7 +25,10 @@
 						<div class="list-block item-block">
 							<ul>
 								<li>
-									<a href="#" class="item-link list-button btn-login box-border-radius">Ingresar</a>
+									<input type="submit" class="item-link list-button btn-login box-border-radius" name="login" value="Ingresar">
+								</li>
+								<li class="text-center">
+									<span>ó</span>
 								</li>
 								<li>
 									<a href="#" class="item-link list-button btn-facebook box-border-radius">
@@ -35,14 +39,15 @@
 							</ul>
 						</div>
 					</form>
-				</div>
-				<div class="text-center">
-					<p>
-						<a href="#" class="btn-default box-border-radius">Registrarme</a>
-					</p>
-					<p>
-						<a href="index.html">Acceder ahora, luego me registro</a>
-					</p>
+					<div class="text-center">
+						<p>
+							<a href="html/signup.html" id="signup" class="btn-default box-border-radius">Registrarme</a>
+						</p>
+						<br>
+						<p>
+							<a href="index.html" id="home" style="color: black !important;">Acceder ahora, luego me registro</a>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
