@@ -1,22 +1,23 @@
 var TuCocinasApp = new Framework7({
 	swipeBackPage: false,
-	swipePanel: 'left'
+	swipePanel: 'left',
+	fastClicks: false
 });
 var $$ = Dom7;
-var url_server = 'http://tucocinas.herokuapp.com/';
-//var url_server = 'http://192.168.43.169:8000/';
+//var url_server = 'http://tucocinas.herokuapp.com/';
+var url_server = 'http://192.168.0.8:8000/';
 var next_link_home = 'api/receta/lista/?format=json';
-var filter_search = '';
 var var_loading = true;
-var get_var_offset = '';
 var next_to = true;
 var lastIndex = 0;
 var maxItems = 0;
 var mainView = TuCocinasApp.addView('.view-main');
 
+ajax_setup();
+
 $$(document).on('deviceready', function(device){
+	set_data('filter_search', '&');
 	send_by_ajax_get({'href': url_server+'api/base/data/?format=json', 'type': 'init_data'});
-	ajax_setup();
 	if(get_data('user') == null){
 		$$('#login').trigger('click');
 	}else{
@@ -29,6 +30,7 @@ var home_page = TuCocinasApp.onPageInit('home', function(page){
 	lastIndex = 0;
 	maxItems = 0;
 	var_loading = false;
+	set_data('get_var_offset', '&limit=2');
 	$$('.page-content').addClass('hide-bars-on-scroll infinite-scroll');
 	TuCocinasApp.attachInfiniteScroll($$('.infinite-scroll'));
 	load_data_home();
@@ -62,12 +64,11 @@ var search_page = TuCocinasApp.onPageInit('search', function(page){
 			'<option value="'+value['slug_dificultad']+'">'+value['nombre_dificultad']+'</option>'
 		);
 	});
-	$$('#id_orden').val(getQueryVariable(filter_search, 'orden'));
-	$$('#id_word').val(getQueryVariable(filter_search, 'search'));
-	$$('#id_categoria').val(getQueryVariable(filter_search, 'categoria'));
-	$$('#id_tipo').val(getQueryVariable(filter_search, 'tipo'));
-	$$('#id_dificultad').val(getQueryVariable(filter_search, 'dificultad'));
-	get_var_offset = '';
+	$$('#id_orden').val(getQueryVariable(get_data('filter_search'), 'orden'));
+	$$('#id_word').val(getQueryVariable(get_data('filter_search'), 'search'));
+	$$('#id_categoria').val(getQueryVariable(get_data('filter_search'), 'categoria'));
+	$$('#id_tipo').val(getQueryVariable(get_data('filter_search'), 'tipo'));
+	$$('#id_dificultad').val(getQueryVariable(get_data('filter_search'), 'dificultad'));
 });
 var nuevo_page = TuCocinasApp.onPageInit('nuevo', function(page){
 	toolbar_nuevo();
@@ -98,7 +99,6 @@ var detail_page = TuCocinasApp.onPageInit('detail', function(page){
 		loading();
 		send_by_ajax_get({'href': url_server+'api/receta/detalle/?slug_receta='+page.query.receta, 'type': 'detail_data'});
 	}
-	get_var_offset = '';
 });
 var detail_paso_page = TuCocinasApp.onPageInit('detail-paso', function(page){
 	numero_paso = page.query.paso_receta;

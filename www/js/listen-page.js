@@ -44,7 +44,8 @@ $$(document).on('submit', '#login-form', function(e){
 $$(document).on('click', '#search-button', function(e){
 	e.preventDefault();
 	var form = $$('#search-form')[0];
-	filter_search = '&search='+form[0]['value']+'&categoria='+form[1]['value']+'&tipo='+form[2]['value']+'&dificultad='+form[3]['value']+'&orden='+form[4]['value'];
+	set_data('filter_search', '&search='+form[0]['value']+'&categoria='+form[1]['value']+'&tipo='+form[2]['value']+'&dificultad='+form[3]['value']+'&orden='+form[4]['value']);
+	set_data('get_var_offset', '&limit=2');
 	$$('#home-page').trigger('click');
 });
 $$(document).on('infinite', '.infinite-scroll', function(){
@@ -63,16 +64,21 @@ $$(document).on('infinite', '.infinite-scroll', function(){
 });
 $$(document).on('click', '.link-control-like', function(){
 	if(get_data('user') != null){
-		if($$(this).attr('data-state') == 'enable'){
-			$$(this).attr('data-state', 'disable').children().attr('src', 'img/icon/start_off.png');
+		var data = {};
+		var sum_heart = 0;
+		var element = $$(this);
+		if(element.attr('data-state') == 'enable'){
+			element.attr('data-state', 'disable').children().attr('src', 'img/icon/start_off.png');
 		}else{
-			$$(this).attr('data-state', 'enable').children().attr('src', 'img/icon/start_on.png');
+			element.attr('data-state', 'enable').children().attr('src', 'img/icon/start_on.png');
 		}
+		send_by_ajax_get({'href': element.attr('href')});
+		send_by_ajax_get({'href': url_server+'api/receta/detalle/?slug_receta='+page.query.receta, 'type': 'save_data_offline'});
 	}else{
 		TuCocinasApp.alert('No has iniciado sesión aún', 'Error');
 	}
 });
-$$(document).on('click', '.like-control-heart', function(){
+$$(document).on('click', '.like-control-heart', function(event){
 	if(get_data('user') != null){
 		var data = {};
 		var sum_heart = 0;
@@ -85,16 +91,12 @@ $$(document).on('click', '.like-control-heart', function(){
 			sum_heart = 1;
 		}
 		element.children('span').text(parseInt(element.children('span').text()) + sum_heart);
-		if(var_loading){
-			data['href'] = element.attr('href');
-			data['sum_heart'] = sum_heart;
-			send_by_ajax_get(data);
-			var_loading = false;
-		}
+		data['href'] = element.attr('href');
+		data['sum_heart'] = sum_heart;
+		send_by_ajax_get(data);
 	}else{
 		TuCocinasApp.alert('No has iniciado sesión aún', 'Error');
 	}
-	var_loading = true;
 });
 $$(document).on('change', '.input-upload-receta-image', function(input){
 	console.log(input)

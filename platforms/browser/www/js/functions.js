@@ -56,6 +56,7 @@ function select_function(type, data){
 		break;
 		case 'detail_data':
 			detail_data_event(data);
+		break;
 		case 'receta_data':
 			receta_data_event(data);
 		break;
@@ -64,6 +65,7 @@ function select_function(type, data){
 }
 function receta_data_event(data){
 	TuCocinasApp.alert(data['msg'], data['type'])
+	$$('.home-option').trigger('click');
 }
 function detail_data_event(data){
 	set_data('last-detail', data);
@@ -71,25 +73,25 @@ function detail_data_event(data){
 	$$('[data-page="detail"] .control-like').html(
 		'<div class="content-white" style="margin-top: -5px;">'+
 			'<div class="content-control">'+
-				'<a href="'+url_server+'api/receta/like-heart/?receta='+data['slug_receta']+'" class="link-control-option like-control-heart" data-state="'+((data['heart_like_receta_user'].indexOf(get_data('user')['email']) > -1)? 'enable': 'disable')+'" data-user="'+data['usuario_nombre']['token']+'" data-id="'+data['pk']+'">'+
-					'<img src="img/icon/heart_like_'+((data['heart_like_receta_user'].indexOf(get_data('user')['email']) > -1)? 'on': 'off')+'.png">'+
+				'<span href="'+url_server+'api/receta/like-heart/?receta='+data['slug_receta']+'" class="link-control-option like-control-heart" data-state="'+((data['heart_like_receta_user'].indexOf((get_data('user') != null)? get_data('user')['email']: '') > -1)? 'enable': 'disable')+'" data-user="'+data['usuario_nombre']['token']+'" data-id="'+data['pk']+'">'+
+					'<img src="img/icon/heart_like_'+((data['heart_like_receta_user'].indexOf((get_data('user') != null)? get_data('user')['email']: '') > -1)? 'on': 'off')+'.png">'+
 					'<span>'+data['calificacion_receta']+'</span>'+
-				'</a>'+
-				'<a class="link-control-option">'+
+				'</span>'+
+				'<span class="link-control-option">'+
 					'<img src="img/icon/level_'+data['dificultad_receta_nombre']['nivel']+'.png">'+
 					'<span>'+data['dificultad_receta_nombre']['dificultad']+'</span>'+
-				'</a>'+
-				'<a class="link-control-option">'+
+				'</span>'+
+				'<span class="link-control-option">'+
 					'<img src="img/icon/time.png">'+
 					'<span>'+data['tiempo_preparacion_receta']+'</span>'+
-				'</a>'+
-				'<a class="link-control-option">'+
+				'</span>'+
+				'<span class="link-control-option">'+
 					'<img src="img/icon/portion.png">'+
 					'<span>'+data['porciones_receta']+'</span>'+
-				'</a>'+
-				'<a href="#" class="link-control-like" data-state="disable">'+
+				'</span>'+
+				'<span href="#" class="link-control-like" data-state="disable">'+
 					'<img src="img/icon/start_off.png">'+
-				'</a>'+
+				'</span>'+
 			'</div>'+
 		'</div>'
 	);
@@ -125,8 +127,8 @@ function init_data_event(data){
 	TuCocinasApp.formStoreData('tipo', data['tipo']);
 }
 function login_data(data){
-	ajax_setup();
 	set_data('user', data);
+	ajax_setup();
 	$$('#home').trigger('click');
 }
 function register_data(data){
@@ -140,63 +142,67 @@ function get_data(key){
 }
 function load_data_home(){
 	loading();
-	if(next_to){
-		$$.getJSON(url_server+next_link_home+filter_search+get_var_offset, {}, function(response){
-			maxItems = response['count'];
-			if(response['next'] != null){
-				get_var_offset = '&limit=2&offset='+getQueryVariable(response['next'], 'offset');
-			}else{
-				next_to = false;
-				get_var_offset = '&limit=2';
-			}
-			$$.each(response['results'], function(index, value){
-				lastIndex =+ 1;
-				$$('#content_data').append(
-					'<div class="content-white box-border-radius">'+
-						'<a href="html/detail.html?receta='+value['slug_receta']+'" class="link link-option" id="detail-option">'+
-							'<div class="content-image text-center">'+
-								'<img src="'+url_server+value['receta_url_imagen']+'" class="box-top-border-radius img-background">'+
-							'</div>'+
-							'<div class="box-padding">'+
-								'<div class="content-recipe">'+
-									'<p class="title"><b>'+value['nombre_receta']+'</b></p>'+
-									'<p class="description">'+value['descripcion_receta'].substring(0,150)+'...</p>'+
+	setTimeout(function(){
+		console.log(get_data('filter_search'))
+		if(next_to){
+			$$.get(url_server+next_link_home+get_data('filter_search')+get_data('get_var_offset'), function(response){
+				response = JSON.parse(response);
+				maxItems = response['count'];
+				if(response['next'] != null){
+					set_data('get_var_offset', '&limit=2&offset='+getQueryVariable(response['next'], 'offset'));
+				}else{
+					next_to = false;
+					set_data('get_var_offset', '&limit=2');
+				}
+				$$.each(response['results'], function(index, value){
+					lastIndex =+ 1;
+					$$('#content_data').append(
+						'<div class="content-white box-border-radius">'+
+							'<a href="html/detail.html?receta='+value['slug_receta']+'" class="link link-option" id="detail-option">'+
+								'<div class="content-image text-center">'+
+									'<img src="'+url_server+value['receta_url_imagen']+'" class="box-top-border-radius img-background">'+
 								'</div>'+
+								'<div class="box-padding">'+
+									'<div class="content-recipe">'+
+										'<p class="title"><b>'+value['nombre_receta']+'</b></p>'+
+										'<p class="description">'+value['descripcion_receta'].substring(0,150)+'...</p>'+
+									'</div>'+
+								'</div>'+
+							'</a>'+
+							'<div class="content-control">'+
+								'<span href="'+url_server+'api/receta/like-heart/?receta='+value['slug_receta']+'" class="link-control-option like-control-heart" data-state="'+((value['heart_like_receta_user'].indexOf((get_data('user') != null)? get_data('user')['email']: '') > -1)? 'enable': 'disable')+'" data-user="'+value['usuario_nombre']['token']+'" data-id="'+value['pk']+'">'+
+									'<img src="img/icon/heart_like_'+((value['heart_like_receta_user'].indexOf((get_data('user') != null)? get_data('user')['email']: '') > -1)? 'on': 'off')+'.png">'+
+									'<span>'+value['calificacion_receta']+'</span>'+
+								'</span>'+
+								'<span class="link-control-option">'+
+									'<img src="img/icon/level_'+value['dificultad_receta_nombre']['nivel']+'.png">'+
+									'<span>'+value['dificultad_receta_nombre']['dificultad']+'</span>'+
+								'</span>'+
+								'<span class="link-control-option">'+
+									'<img src="img/icon/time.png">'+
+									'<span>'+value['tiempo_preparacion_receta']+'</span>'+
+								'</span>'+
+								'<span href="'+url_server+'api/receta/like-star/?receta='+value['slug_receta']+'" class="link-control-option link-control-like" data-state="'+((value['star_like_receta_user'].indexOf((get_data('user') != null)? get_data('user')['email']: '') > -1)? 'enable': 'disable')+'" data-user="'+value['usuario_nombre']['token']+'" data-id="'+value['pk']+'">'+
+									'<img src="img/icon/start_off.png">'+
+								'</span>'+
 							'</div>'+
-						'</a>'+
-						'<div class="content-control">'+
-							'<a href="'+url_server+'api/receta/like-heart/?receta='+value['slug_receta']+'" class="link-control-option like-control-heart" data-state="'+((value['heart_like_receta_user'].indexOf(get_data('user')['email']) > -1)? 'enable': 'disable')+'" data-user="'+value['usuario_nombre']['token']+'" data-id="'+value['pk']+'">'+
-								'<img src="img/icon/heart_like_'+((value['heart_like_receta_user'].indexOf(get_data('user')['email']) > -1)? 'on': 'off')+'.png">'+
-								'<span>'+value['calificacion_receta']+'</span>'+
-							'</a>'+
-							'<a class="link-control-option">'+
-								'<img src="img/icon/level_'+value['dificultad_receta_nombre']['nivel']+'.png">'+
-								'<span>'+value['dificultad_receta_nombre']['dificultad']+'</span>'+
-							'</a>'+
-							'<a class="link-control-option">'+
-								'<img src="img/icon/time.png">'+
-								'<span>'+value['tiempo_preparacion_receta']+'</span>'+
-							'</a>'+
-							'<a href="#" class="link-control-like" data-state="disable">'+
-								'<img src="img/icon/start_off.png">'+
-							'</a>'+
 						'</div>'+
+					'</div>'
+					);
+				});
+				loading_empty();
+			});
+		}else{
+			$$('#content_data').append(
+				'<div class="content-white box-border-radius text-center">'+
+					'<div style="padding: 1px;">'+
+						'<p><b>No hay más datos en el servidor</b></p>'+
 					'</div>'+
 				'</div>'
-				);
-			});
+			);
 			loading_empty();
-		});
-	}else{
-		$$('#content_data').append(
-			'<div class="content-white box-border-radius text-center">'+
-				'<div style="padding: 1px;">'+
-					'<p><b>No hay más datos en el servidor</b></p>'+
-				'</div>'+
-			'</div>'
-		);
-		loading_empty();
-	}
+		}
+	}, 1000);
 }
 function loading_empty(){
 	$$('.animation').html('');
@@ -320,7 +326,7 @@ function toolbar_nuevo(){
 			'<a class="save-form-receta box-paso box-border-radius link-option">'+
 				'<span class="tabbar-label">Publicar</span>'+
 			'</a>'+
-			'<a href="index.html" class="link-option">'+
+			'<a href="index.html" class="link-option no-fastclick home-option">'+
 				'<i class="icon f7-icons">close_round_fill</i>'+
 				'<span class="tabbar-label">Cancelar</span>'+
 			'</a>'+
@@ -330,8 +336,8 @@ function toolbar_nuevo(){
 function ajax_setup(){
 	$$.ajaxSetup({
 		timeout: 10000,
-		headers: {
-			'Content-Type': 'application/json'
+		beforeSend: function(xhr){
+			xhr.requestParameters['contentType'] = 'application/json';
 		},
 		error: function(xhr){
 			var status = xhr.status;
@@ -344,7 +350,7 @@ function ajax_setup(){
 			headers: {
 				'Authorization': 'Token '+get_data('user')['token'],
 				'Token': get_data('user')['token']
-			},
+			}
 		});
 	}
 }
