@@ -143,7 +143,6 @@ function get_data(key){
 function load_data_home(){
 	loading();
 	setTimeout(function(){
-		console.log(get_data('filter_search'))
 		if(next_to){
 			$$.get(url_server+next_link_home+get_data('filter_search')+get_data('get_var_offset'), function(response){
 				response = JSON.parse(response);
@@ -217,10 +216,19 @@ function loading(){
 		"</div>"
 	);
 }
-function each_list(data_array){
+function each_list_ingrediente(data_array){
 	return_data = {};
 	$$.each(data_array, function(index, data){
 		return_data[index] = data.value;
+	});
+	return return_data;
+}
+function each_list_paso(data_array){
+	return_data = {};
+	$$.each(data_array, function(index, data){
+		return_data[index] = {};
+		return_data[index]['value'] = data.value;
+		return_data[index]['image'] = $$('[name="'+data.attributes['data-image']['value']+'"]').value;
 	});
 	return return_data;
 }
@@ -228,8 +236,9 @@ function save_form_receta(on_save){
 	loading();
 	data = {};
 	formReceta = $$('#form-save-receta')[0];
-	lista_ingrediente = each_list(formReceta.id_item_ingrediente);
-	lista_paso = each_list(formReceta.id_item_paso);
+	lista_ingrediente = each_list_ingrediente(formReceta.id_item_ingrediente);
+	lista_paso = each_list_ingrediente(formReceta.id_item_paso);
+	//lista_paso = each_list_paso(formReceta.id_item_paso);
 	data['href'] = url_server+'api/receta/nuevo/';
 	data['error'] = 'Ha ocurrido un error';
 	data['success'] = 'Receta guardada con éxito';
@@ -238,6 +247,7 @@ function save_form_receta(on_save){
 		'on_save': on_save,
 		'data_receta': {
 			'nombre_receta': formReceta.title_receta.value,
+			'foto_receta': formReceta.image_receta.value,
 			'descripcion_receta': formReceta.descripcion_receta.value,
 			'racion_receta': formReceta.racion_receta.value,
 			'dificultad_receta': formReceta.dificultad_receta.value,
@@ -353,4 +363,21 @@ function ajax_setup(){
 			}
 		});
 	}
+}
+function onFail(){
+	TuCocinasApp.alert('No se estableció la imagen', 'Error');
+}
+function CapturePhoto(data_view, input_hiden, source){
+	source = (source == 'camera')? navigator.camera.PictureSourceType.CAMERA: navigator.camera.PictureSourceType.PHOTOLIBRARY;
+	navigator.camera.getPicture(function(imageURL){
+		viewImage(imageURL, input_hiden, data_view);
+	}, onFail, {
+		quality: 100,
+		destinationType: navigator.camera.DestinationType.DATA_URL,
+		sourceType: source
+	});
+}
+function viewImage(imageURL, input_hiden, data_view){
+	$$('[name="'+input_hiden+'"]').val(imageURL);
+	$$(data_view).removeAttr('style').attr('src', 'data:image/jpeg;base64,'+imageURL);
 }

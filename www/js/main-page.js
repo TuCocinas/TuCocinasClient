@@ -4,13 +4,15 @@ var TuCocinasApp = new Framework7({
 	fastClicks: false
 });
 var $$ = Dom7;
-//var url_server = 'http://tucocinas.herokuapp.com/';
-var url_server = 'http://192.168.0.8:8000/';
+var url_server = 'http://tucocinas.herokuapp.com/';
+//var url_server = 'http://192.168.43.169:8000/';
 var next_link_home = 'api/receta/lista/?format=json';
 var var_loading = true;
 var next_to = true;
 var lastIndex = 0;
 var maxItems = 0;
+var image_url = '';
+var item_n_paso = 0;
 var mainView = TuCocinasApp.addView('.view-main');
 
 ajax_setup();

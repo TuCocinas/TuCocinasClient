@@ -136,15 +136,31 @@ $$(document).on('click', '#btn_add_ingrediente', function(event){
 });
 $$(document).on('click', '#btn_add_paso', function(event){
 	var input_paso = $$('#id_paso_receta');
+	item_n_paso += 1;
 	if(input_paso.val() != ''){
 		$$('#paso_receta_item').append(
 			'<li class="row no-gutter">'+
-				'<div class="col-90">'+
-					'<input type="hidden" id="id_item_paso" name="id_item_paso" class="no-border" readonly value="'+input_paso.val()+'" input-required="false">'+
-					'<p style="margin: 0;">'+input_paso.val()+'</p>'+
+				'<div class="col-100 show-image">'+
+					'<img style="display: none;" class="img-background" id="item-'+item_n_paso+'">'+
+					'<input type="hidden" name="#item-'+item_n_paso+'" input-required="false">'+
 				'</div>'+
-				'<div class="col-10">'+
-					'<i class="icon f7-icons delete-item">close</i>'+
+				'<div class="col-100">'+
+					'<div class="row">'+
+						'<div class="col-60">'+
+							'<input type="hidden" name="id_item_paso" data-image="item-'+item_n_paso+'" class="no-border" readonly value="'+input_paso.val()+'" input-required="false">'+
+							'<p style="margin: 0;">'+input_paso.val()+'</p>'+
+						'</div>'+
+						'<div class="col-40 text-center">'+
+							'<div class="row">'+
+								'<div class="col-50">'+
+									'<i class="icon f7-icons camera-item" data-view="#item-'+item_n_paso+'" data-view-item="item-'+item_n_paso+'">camera_fill</i>'+
+								'</div>'+
+								'<div class="col-50">'+
+									'<i class="icon f7-icons delete-item">close</i>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
 				'</div>'+
 			'</li>'
 		)
@@ -153,8 +169,30 @@ $$(document).on('click', '#btn_add_paso', function(event){
 		TuCocinasApp.alert('El campo no puede ser vacío', 'Error');
 	}
 });
+$$(document).on('click', '.camera-item', function(event){
+	show_image_paso_receta = $$(this).attr('data-view');
+	var buttons = [
+		{
+			text: 'Tomar foto a la receta',
+			bold: true,
+			color: 'red',
+			onClick: function(){
+				CapturePhoto(show_image_paso_receta, show_image_paso_receta, 'camera');
+			}
+		},
+		{
+			text: 'Seleccionar foto de la galería',
+			bold: true,
+			color: 'red',
+			onClick: function(){
+				CapturePhoto(show_image_paso_receta, show_image_paso_receta, 'gallery');
+			}
+		},
+	];
+	TuCocinasApp.actions(buttons);
+});
 $$(document).on('click', '.delete-item', function(event){
-	$$(this).parent().parent().remove();
+	$$(this).parents('.row.no-gutter').remove();
 });
 $$(document).on('keypress', '#id_ingrediente_receta', function(event){
 	if(event.which == 13){
@@ -177,4 +215,26 @@ $$(document).on('click', '.save-form-receta', function(){
 	if(return_val == true){
 		save_form_receta(true);
 	}
+});
+$$(document).on('click', '.input-upload-receta-image', function(){
+	var this_type = $$(this);
+	var buttons = [
+		{
+			text: 'Tomar foto a la receta',
+			bold: true,
+			color: 'red',
+			onClick: function(){
+				CapturePhoto(this_type.attr('data-view'), 'image_receta', 'camera');
+			}
+		},
+		{
+			text: 'Seleccionar foto de la galería',
+			bold: true,
+			color: 'red',
+			onClick: function(){
+				CapturePhoto(this_type.attr('data-view'), 'image_receta', 'gallery');
+			}
+		},
+	];
+	TuCocinasApp.actions(buttons);
 });

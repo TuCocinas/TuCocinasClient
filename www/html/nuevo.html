@@ -5,10 +5,11 @@
 				<div class="img-background content-upload-image">
 					<img src="" class="img-background img-uploaded">
 					<div class="upload-image text-center">
-						<i class="icon f7-icons">camera_fill</i>
+						<i class="icon f7-icons">camera</i>
 						<p>Publica la foto de tu receta</p>
 					</div>
-					<input type="file" name="file" class="input-upload-receta-image" accept="image/*" input-required="false" title="foto de la receta" value>
+					<div class="input-upload-receta-image" data-view=".img-uploaded" input-required="false">
+					<input type="hidden" name="image_receta" input-required="false">
 				</div>
 				<div class="content-block" style="margin-top: 10px;">
 					<div class="content-white box-border-radius">
@@ -22,10 +23,10 @@
 							<p class="text-center"><b>Información de la receta</b></p>
 							<div class="spacing-top content-control">
 								<div class="row">
-									<div class="col-60">
+									<div class="col-80">
 										<label><img src="img/icon/portion.png"> <b>Cantidad de raciones:</b></label>
 									</div>
-									<div class="col-40">
+									<div class="col-20">
 										<input type="number" class="no-border form-complete" name="racion_receta" id="id_racion_receta" placeholder="0" input-required="true" title="cantidad">
 									</div>
 								</div>
@@ -35,7 +36,7 @@
 									<div class="col-30">
 										<label><img src="img/icon/level_hard.png"> <b>Dificultad:</b></label>
 									</div>
-									<div class="col-70" style="width: 70%;">
+									<div class="col-70">
 										<select type="select" class="no-border form-complete" name="dificultad_receta" id="id_dificultad_receta" input-required="true" title="dificultad de la receta">
 											<option value="">Selecciona la dificultad</option>
 										</select>
@@ -44,10 +45,10 @@
 							</div>
 							<div class="spacing-top content-control">
 								<div class="row">
-									<div class="col-60">
+									<div class="col-70">
 										<label><img src="img/icon/time.png"> <b>Tiempo de preparación:</b></label>
 									</div>
-									<div class="col-40">
+									<div class="col-20">
 										<input type="text" class="no-border form-complete" name="tiempo_receta" id="id_tiempo_receta" placeholder="10:00" input-required="true" title="tiempo de elaboración">
 									</div>
 								</div>
@@ -57,7 +58,7 @@
 									<div class="col-30">
 										<label><b>Categoría:</b></label>
 									</div>
-									<div class="col-70" style="width: 70%;">
+									<div class="col-70">
 										<select type="select" class="no-border form-complete" name="categoria_receta" id="id_categoria_receta" input-required="true" title="categoría de la receta">
 											<option value="">Selecciona la categoría</option>
 										</select>
@@ -69,7 +70,7 @@
 									<div class="col-30">
 										<label><b>Tipo de receta:</b></label>
 									</div>
-									<div class="col-70" style="width: 60%;">
+									<div class="col-70">
 										<select type="select" class="no-border form-complete" name="tipo_receta" id="id_tipo_receta" input-required="true" title="tipo de receta">
 											<option value="">Selecciona el tipo</option>
 										</select>
@@ -107,6 +108,7 @@
 						</div>
 					</div>
 				</div>
+				<br><br>
 			</form>
 		</div>
 	</div>
